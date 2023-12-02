@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { useCookies } from 'react-cookie';
 
 function App() {
+  const [cookies, setCookie, removeCookie] = useCookies(['user']);
+
+  const handleLogin = () => {
+    setCookie('user', 'john', { path: '/' });
+  };
+
+  const handleLogout = () => {
+    removeCookie('user');
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {cookies.user ? (
+        <button onClick={handleLogout}>Logout</button>
+      ) : (
+        <button onClick={handleLogin}>Login</button>
+      )}
     </div>
   );
 }
