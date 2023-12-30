@@ -5,7 +5,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleLogin = () => {
-    axios.post('http://localhost:8080/login', { withCredentials: true })
+    axios.post('http://localhost:8080/login', {}, { withCredentials: true })
       .then(response => {
         console.log(response.data);
         setIsLoggedIn(true);
@@ -16,14 +16,14 @@ function App() {
   };
 
   const handleLogout = () => {
-    axios.post('http://localhost:8080/logout', { withCredentials: true })
+    axios.post('http://localhost:8080/logout', {}, { withCredentials: true })
       .then(() => setIsLoggedIn(false))
       .catch(err => console.error(err));
   };
 
   const checkSecret = () => {
     console.log("checkSecret is called");
-    axios.get('http://localhost:8080/secret',{}, { withCredentials: true }) //これがひつようだった
+    axios.get('http://localhost:8080/secret', { withCredentials: true })
       .then(response => console.log(response.data))
       .catch(err => console.error(err));
   };
